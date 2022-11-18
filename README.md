@@ -8,6 +8,15 @@
 
 # User Instructions
 
+### Example paths
+
+```
+curl http://localhost/1 -- for one
+curl http://localhost:3000/?sesson=5&name=Walter%20White&portrayed=Bryan%20Cranston -- for list
+
+```
+
+
 ### Requirements
 
 In order to run this project you will need to install the LTS version of Node, found at [this link](https://nodejs.org/en/download/)
