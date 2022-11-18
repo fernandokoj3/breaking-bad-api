@@ -14,7 +14,7 @@ if (environmment) {
 export const DATABASE = database;
 export const BASE_PATH = '/'
 export const PAGINATION = Object.freeze({
-  MAX_LIMIT_SIZE : 100,
+  MAX_LIMIT_SIZE : 20,
   MIN_PAGE_SIZE : 0,
   MIN_START_PAGE : 1,
   DEFAULT_SORT: 'DESC',

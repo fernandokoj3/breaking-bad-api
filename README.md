@@ -16,6 +16,9 @@ curl http://localhost:3000/?sesson=5&name=Walter%20White&portrayed=Bryan%20Crans
 
 ```
 
+See example from Insominia
+
+![image info](./example.png)
 
 ### Requirements
 

@@ -9,16 +9,25 @@ export class BreakingBadJsonRepository {
     constructor(){}
 
     public async find(pageable: PageableRequest<BreakingBadRequest> ) {
-        let { name, sesson, portrayed } = pageable.entity
+        let { name, sesson, portrayed } = pageable.entity;
+        let { page, limit, order, sort } = pageable;
+        let isAsc = order === 'asc'
         let query = DATABASE.filter((f) => {
-            return  name ? (f["name"]|| "").toLowerCase().match(name.toLowerCase())  : f["name"] === f["name"] 
-                &&  sesson ? (f["appearance"] || []).includes(sesson) : f["appearance"] === f["appearance"]
-                &&  portrayed ? (f["portrayed"] || []).includes(portrayed) : f["portrayed"] === f["portrayed"]
+            return  (name ? (f["name"]|| "").toLowerCase().match(name.toLowerCase())  : f["name"] === f["name"] )
+                &&  (sesson ? (f["appearance"] || []).includes(sesson) : f["appearance"] === f["appearance"])
+                &&  (portrayed ? (f["portrayed"] || []).includes(portrayed) : f["portrayed"] === f["portrayed"])
 
         })
+        let result = [];
+        if (isAsc) {
+            result = query.sort((a, b) => (a[sort] > b[sort] ? 1: -1 ))
+        } else {
+            result = query.sort((a, b) => (a[sort] > b[sort] ? -1: 1 ))
+        }
+
+        result = result.slice((page) * limit , (page + 1) * limit)
 
         let total = query.length
-        let result = query
         return { result , total }
     }
 

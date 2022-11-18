@@ -30,10 +30,10 @@ export class PageMetaResponse {
 
     constructor(options: PageableOptions, totalItems: number, totalItemsPage: number){
         this.order_by = options.order + ' ' + options.sort 
-        this.page = options.page + 1
+        this.page = options.page
         this.limit = options.limit
         this.total_items = totalItems;
-        this.total_pages = Math.ceil(this.total_items / this.limit);
+        this.total_pages = Math.ceil(this.total_items / this.limit) - 1;
         this.total_items_page = totalItemsPage
         this.has_previous_page =  this.total_items_page === 0 ? false : this.page > 1;
         this.has_next_page = this.total_items_page === 0 ? false : this.page < this.total_pages;

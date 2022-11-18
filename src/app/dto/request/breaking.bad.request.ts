@@ -1,22 +1,24 @@
-import { IsArray, IsDefined, IsEnum, IsInt, IsNumberString, IsOptional, IsString, Matches, Max, Min } from "class-validator";
+import { IsArray, IsDefined, IsEnum, IsIn, IsInt, IsNumberString, IsOptional, IsPositive, IsString, Matches, Max, Min } from "class-validator";
 import { IsValidNumber } from "@/middlewares/custom.validation";
-import { Sortable } from "./page.base.request";
-import { Transform } from "class-transformer";
+import { PageBaseRequest, Sortable } from "./page.base.request";
+import { Transform, Type } from "class-transformer";
 
 export class BreakingBadOneRequest {
     @IsValidNumber()
     id: number | string
 }
 
-export class BreakingBadRequest implements Sortable {
+export class BreakingBadRequest extends PageBaseRequest implements Sortable {
     
-    sort: string;
+    @IsOptional()
+    @IsIn(["char_id", "birthday", "portrayed", "status", "name"])
+    sort: string = "char_id";
 
-    order: string;
-
-    limit: number;
-
-    page: number;
+    @IsOptional()
+    @IsString()
+    @IsIn(["asc", "desc"])
+    @Transform(({ value }) => value.toLowerCase() )
+    order: string = "asc";
 
     @IsOptional()
     @IsString()

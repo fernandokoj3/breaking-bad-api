@@ -27,7 +27,7 @@ export class BreakingBadService {
         let content = plainToInstance(BreakingBadResponse, result);
 
         log.info('Create pageable response')
-        return new PageResponse(content, meta);
+        return new PageResponse(content as any, meta);
     }
 
     public async one(id: number) {
